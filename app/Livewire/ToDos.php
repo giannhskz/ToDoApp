@@ -20,7 +20,7 @@ class ToDos extends Component
     }
 
     public function mount(){
-        $this->toDos = $this->user->todos()->get();
+        $this->toDos = $this->user->todos()->orderBy('completed')->get();
     }
 
     public function completeTask($toDo){
