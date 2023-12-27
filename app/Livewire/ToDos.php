@@ -2,15 +2,17 @@
 
 namespace App\Livewire;
 
+use App\Models\ToDo;
 use Livewire\Component;
 
 class ToDos extends Component
 {
     public $user;
     public $toDos;
+    public $todoForm = false;
 
     public function addToDo(){
-
+        $this->todoForm = true;
     }
     public function render()
     {
@@ -18,6 +20,13 @@ class ToDos extends Component
     }
 
     public function mount(){
-        $toDos = $this->user->todos();
+        $this->toDos = $this->user->todos()->get();
+    }
+
+    public function completeTask($toDo){
+        $retrievedToDo = ToDo::find($toDo['id']);
+        $retrievedToDo->completed = true;
+        $retrievedToDo->save();
+        return redirect('/dashboard');
     }
 }
