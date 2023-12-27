@@ -2,20 +2,21 @@
     @if(!is_null($toDos))
         @foreach($toDos as $toDo)
             @if($toDo->completed)
-                <div class="bg-gray-500 border border-indigo-400 rounded-lg m-2 p-2 ">
-                    <span>Title: </span>{{ $toDo->title }}
-                    <span>Description: </span>{{$toDo->description}}
-                    <span>Due Date: </span>{{$toDo->due_date}}
-                    COMPLETED
+                <div class="bg-gray-500 border border-indigo-400 rounded-lg m-2 p-2 flex flex-col  place-items-center">
+                    <h1 class="text-lg font-semibold underline">COMPLETED</h1>
+                    <span>Title: {{ $toDo->title }}</span>
+                    <span>Description: {{$toDo->description}}</span>
+                    @if($toDo->due_date) <span>Due Date: {{$toDo->due_date}}</span>@endif
+
                 </div>
 
             @else
-                <div class="border border-indigo-400 rounded-lg m-2 p-2">
-                    <span>Title: </span>{{ $toDo->title }}
-                    <span>Description: </span>{{$toDo->description}}
-                    <span>Due Date: </span>{{$toDo->due_date}}
+                <div class="border border-indigo-400 rounded-lg m-2 p-2 flex flex-col  place-items-center">
+                    <span>Title: {{ $toDo->title }}</span>
+                    <span>Description: {{$toDo->description}}</span>
+                    @if($toDo->due_date) <span>Due Date: {{$toDo->due_date}}</span>@endif
                     <button type="button" wire:click="completeTask({{$toDo}})"
-                    class="border border-2 bg-red-50 rounded-lg"> Complete Task
+                    class="border border-2 bg-red-50 rounded-lg p-1 mt-1"> Complete Task
                     </button>
                 </div>
             @endif
